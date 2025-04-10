@@ -1,0 +1,40 @@
+示例编译步骤：
+使用的GDB版本是gdb-9.1。
+
+1. 环境
+    目标平台：IMX6ULL
+    编译环境： Ubuntu20.04
+
+2. 从git仓库或者GDB官网下载。
+github仓库：git clone https://github.com/HHF-DOUZI/gdb-debug.git
+GDB官网：http://ftp.gnu.org/gnu/gdb/
+
+3. 进入到目录下
+    cd ~/gdb-9.1
+    mkdir -p ~/gdb-9.1/arm_install
+    mkdir -p ~/gdb-9.1/build
+    cd build
+
+4. configure配置
+    --prefix 指定编译输出路径
+    CC 指定交叉编译工具链
+    --host 指定目标平台，一般设置为交叉编译工具链的前缀即可
+    gdb 默认编译的是静态库，如需使用动态库则增加参数：--enable-shared
+    如果需要屏蔽一些不使用的功能：--disable-xxx
+
+    在build目录下
+    ../configure --host=arm-linux-gnueabihf --target=arm-linux-gnueabihf CC=arm-linux-gnueabihf-gcc --prefix=/home/dl/gdb-9.1/arm_install/
+
+5. 编译安装
+    make
+    make install
+
+6. 查看结果
+    最后将输出到~/gdb-9.1/arm_install目录下
+
+7. 将生成的可执行文件放到目标平台上
+    ~/gdb-9.1/arm_install/bin/gdb 放到目标平台上。
+
+8. 查看版本
+    在目标板子上：
+    ./gdb --version
